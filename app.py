@@ -33,10 +33,14 @@ def get_tiktok():
 
     try:
         response = requests.post(api_url, json=payload, headers=headers)
-        response.raise_for_status()
+        response.raise_for_status()  # HTTP hata kodlarını tetikle
         return jsonify(response.json())
     except requests.exceptions.RequestException as e:
-        return jsonify({"error": str(e)}), 500
+        print(f"RapidAPI isteğinde hata: {e}")
+        return jsonify({"error": f"RapidAPI isteği başarısız: {str(e)}"}), 500
+    except Exception as e:
+        print(f"Beklenmeyen hata: {e}")
+        return jsonify({"error": f"Beklenmeyen hata: {str(e)}"}), 500
 
 if __name__ == "__main__":
     import os
