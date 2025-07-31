@@ -1,15 +1,18 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import requests
 
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/")
+def home():
+    return "TikTok API ayakta! 🚀"
+
+# Örnek TikTok endpoint'i
 @app.route("/gettiktok", methods=["POST"])
 def get_tiktok():
-    tiktok_url = request.json.get("url")
-    if not tiktok_url:
-        return jsonify({"error": "No URL provided"}), 400
+    # burada senin TikTok işlemlerin olacak
+    return jsonify({"status": "ok"})
 
     api_url = "https://tiktok-video-no-watermark2.p.rapidapi.com"
     payload = {
